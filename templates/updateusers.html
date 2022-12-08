@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Update, delete or add new users</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  </head>
+  <body>
+    <h1>Update, delete or add new users</h1>
+    <main class="container">
+      <form action="displayuser" method="POST">
+        <fieldset>
+          <legend>Select user identification:</legend>
+        <label for="userId">User identification:</label>
+        <select id="userId" name="userId" required="required">
+          {%for u in users%}
+            <option value="{{u}}">{{u}}</option>
+          {%endfor%}
+        </select>
+        <button class="button button-send" type="submit">Display user data</button>
+        </fieldset>
+      </form>
+      <br>
+      <form action="saveuser" method="POST"><br>
+        <fieldset>
+          <legend>Update users data:</legend>
+        <br>
+         <label for="id">Id user:</label> <input id="id" name="id" type="text" value="{{selected_user.id}}"><br>
+         <label for="customer">Is customer</label>
+         <input type="checkbox" id="customer" name="customer" value="checked" {{selected_user.customer}}><br>
+         <label for="supplier">Is supplier</label>
+         <input type="checkbox" id="supplier" name="supplier" value="checked" {{selected_user.supplier}}><br>
+         <label for="supplier">Is admin</label>
+         <input type="checkbox" id="admin" name="admin" value="checked"  {{selected_user.admin}}><br>
+        <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{selected_user.name}}"><br>
+        <label for="street">Street:</label> <input id="street" name="street" type="text" value="{{selected_user.street}}"><br>
+        <label for="city">City:</label> <input id="city" name="city" type="text" value="{{selected_user.city}}"><br>
+        <label for="state">State:</label> <input id="state" name="state" type="text" value="{{selected_user.state}}"><br>
+        <label for="iban">SWIFT-IBAN:</label> <input id="iban" name="iban" type="text" value="{{selected_user.iban}}"><br>
+        <label for="payment">Payment:</label> <input id="payment" name="payment" type="text" value="{{selected_user.payment}}" > <br>
+        <label for="etc">Etc:</label> <input id="etc" name="etc" type="text" value="{{selected_user.etc}}"><br>
+        <label for="password">Password:</label> <input id="password" name="password" type="text" value="{{selected_user.password}}"><br>
+        <button class="button button-send" type="submit" name="update" value=1>Update</button>
+        <button class="button button-send" type="submit" name="delete" onclick="if(confirm('Are you sure ?')){}else{return false;};" value=3>Delete</button>
+        <button class="button button-send" type="submit" name="new" value=2>Add</button>
+        </fieldset>
+      </form>
+      <p class="error">{{error}}</p>
+    </main>
+  </body>
+</html>

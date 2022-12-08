@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Update, delete or add new products</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  </head>
+  <body>
+    <h1>Update, delete or add new products</h1>
+    <main class="container">
+      <form action="displayproduct" method="POST"><br>
+        <fieldset>
+          <legend>Select product identification:</legend>
+        <label for="productId">Product identification:</label>
+        <select id="productId" name="productId" required="required">
+          {%for p in products%}
+            <option value="{{p}}">{{p}}</option>
+          {%endfor%}
+        </select>
+        <button class="button button-send" type="submit">Display product data</button>
+        </fieldset>
+      </form>
+      <br>
+      <form action="saveproduct" method="POST"><br>
+        <fieldset>
+          <legend>Update products data:</legend>
+        <br>
+        <label for="id">Id product:</label> <input id="id" name="id" type="text" value="{{selected_product.id}}"><br>
+        <label for="name">Name:</label> <input id="name" name="name" type="text" value="{{selected_product.name}}"><br>
+        <label for="location">Location:</label> <input id="location" name="location" type="text" value="{{selected_product.location}}"><br>
+        <label for="price">Price:</label> <input id="price" name="price" type="text" value="{{selected_product.price}}"><br>
+        <label for="minimunstock">Minimun stock:</label> <input id="minimunstock" name="minimunstock" type="text" value="{{selected_product.minimunstock}}"><br>
+        <label for="initialstock">Initial stock:</label> <input id="initialstock" name="initialstock" type="text" value="{{selected_product.initialstock}}"><br>
+        <label for="tax">Tax:</label> <input id="tax" name="tax" type="text" value="{{selected_product.tax}}" > <br>
+        <label for="description">Description:</label> <input id="description" name="description" type="text" value="{{selected_product.description}}"><br>
+        <button class="button button-send" type="submit" name="update" value=1>Update</button>
+        <button class="button button-send" type="submit" name="delete" onclick="if(confirm('Are you sure ?')){}else{return false;};"  value=3>Delete</button>
+        <button class="button button-send" type="submit" name="new" value=2>Add</button>
+        </fieldset>
+      </form>
+      <p class="error">{{error}}</p>
+    </main>
+  </body>
+</html>

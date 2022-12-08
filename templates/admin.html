@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>AdminData</title>
-    <meta charset="UTF-8" name="author" content="LCS">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
-</head>
-<body>
-    <p class="form-title">admin data</p><br>
+  </head>
+  <body>
+    <h1>Administrator data management</h1>
+    <h3>Database managment:</h3>
+    <ul>
+    <li><p class="form-title"><a href="updateusers">Update, delete or add new users</a></p></li>
+    <li><p class="form-title"><a href="updateproducts">Update, delete or add new products</a></p></li>
+    <li><p class="form-title"><a href="updateactivity">Update, delete or add new activity</a></p></li>
+    </ul>
+    <br>
+    <h3>Database information</h3>
     <p>Period from {{initial}} to {{final}}</p><br>
     <img src="static/img/graph-admin-sales.jpg" width="800">
     <p class="form-title">Total sales: {{ sales }}</p><br>
-    <img src="static/img/graph-admin-units-sold.jpg" width="800">
+    <img src="static/img/graph-admin-units-sold.jpg" width="800"> <br>
     <img src="static/img/graph-admin-inventory.jpg" width="800">
-    <p class="form-title">Products under minimum stock</p><br>
+    <h3>Products under minimum stock<h3><br>
+    {%for e in alerts%} {%endfor%}
     <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Placement</th>
-                <th>Minimum stock</th>
-                <th>Current stock</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%for e in alerts%}
-                <tr>
-                    <td> {{e[0]}}</td>
-                    <td> {{e[1]}}</td>
-                    <td> {{e[2]}}</td>
-                    <td> {{e[3]}}</td>
-                </tr>
-            {%endfor%}
-        </tbody>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Placement</th>
+          <th>Minimum stock</th>
+          <th>Current stock</th>
+        </tr>
+      </thead>
+      <tbody>
+          {%for e in alerts%}
+        <tr>
+          <td> {{e[0]}}</td>
+          <td> {{e[1]}}</td>
+          <td> {{e[2]}}</td>
+          <td> {{e[3]}}</td>
+          {%endfor%}
+        </tr>
+      </tbody>
     </table>
-</body>
+  </body>
 </html>

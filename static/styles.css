@@ -11,6 +11,23 @@ p.form-title {
 }
 label {
     font-size: small;
+    display: inline-block;
+    width: 110px;
+    text-align: right;
+}
+.labelradio{
+    font-size: small;
+    display: inline-block;
+    width: 50px;
+    text-align: right;
+
+}
+labelinit{
+    font-size: small;
+    display: inline-block;
+    width: 1px;
+    text-align: right;
+
 }
 input {
     font-size: medium;

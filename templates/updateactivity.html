@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Update, delete or add new activity</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+  </head>
+  <body>
+    <h1>Update, delete or add new activity</h1>
+    <main class="container">
+      <form action="displayactivity" method="POST"><br>
+        <fieldset>
+          <legend>Select activity identification:</legend>
+        <label for="activityId">Activity identification:</label>
+        <select id="activityId" name="activityId" required="required">
+          {%for a in activity%}
+            <option value="{{a.0}}">{{a.0}}: {{a.1}}, {{a.2}}</option>
+          {%endfor%}
+        </select>
+        <button class="button button-send" type="submit">Display activity data</button>
+        </fieldset>
+      </form>
+      <br>
+      <form action="saveactivity" method="POST"><br>
+        <fieldset>
+          <legend>Update activity data:</legend>
+        <br>
+         <label>Purchase/sale:</label>
+         <label for="C" class="labelradio">Purchase</label>
+         <input type="radio" id="C" name="inout" value="C" {%if selected_activity.inout=="C" %} checked {% endif %} >
+         <label for="V" class="labelradio">Sale</label>
+         <input type="radio" id="V" name="inout" value="V" {%if selected_activity.inout=="V" %} checked {% endif %} ><br>
+         <label for="id">id:</label> <input id="id" name="id" type="text" value="{{selected_activity.id}}" readonly><br>
+         <label for="productId">Id product:</label>
+         <select id="productId" name="idproduct" required="required">
+           {%for p in products%}
+             <option value="{{p}}"{% if p == selected_activity.idproduct %} selected {% endif %} >{{p}}</option>
+           {%endfor%}
+          </select><br>
+          <label for="users">Supplier/Customer:</label>
+          <select id="users" name="idsuppocust" required="required">
+            {%for s in users%}
+              <option value="{{s}}"{% if s == selected_activity.idsuppocust %} selected {% endif %} >{{s}}</option>
+            {%endfor%}
+          </select><br>
+        <label for="price">Price:</label> <input id="price" name="price" type="text" value="{{selected_activity.price}}"><br>
+        <label for="date">Date:</label> <input id="date" name="date" type="date" value="{{selected_activity.date}}"><br>
+        <label for="serialnum">Serial number:</label> <input id="serialnum" name="serialnum" type="text" value="{{selected_activity.serialnum}}"><br>
+        <label for="etc">Etc:</label> <input id="etc" name="etc" type="text" value="{{selected_activity.etc}}"><br>
+        <button class="button button-send" type="submit" name="update" value=1>Update</button>
+        <button class="button button-send" type="submit" name="delete" onclick="if(confirm('Are you sure ?')){}else{return false;};" value=3>Delete</button>
+        <button class="button button-send" type="submit" name="new" value=2>Add</button>
+        </fieldset>
+      </form>
+      <p class="error">{{error}}</p>
+    </main>
+  </body>
+</html>
